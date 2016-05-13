@@ -3,7 +3,7 @@ VoxPlex synchronizes files to/from SunVox for iOS
 """
 from setuptools import find_packages, setup
 
-dependencies = ['click']
+dependencies = ['click', 'prompt-toolkit', 'pyquery', 'requests']
 
 setup(
     name='voxplex',
