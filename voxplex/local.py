@@ -95,7 +95,7 @@ class Local(object):
     def all_resources(self, top='/'):
         while top.startswith('/'):
             top = top[1:]
-        root_path = os.path.abspath(os.path.join(self.root, top))
+        os.path.abspath(os.path.join(self.root, top))
         root = LocalDir(self, top)
         paths_to_get = [root]
         while len(paths_to_get) > 0:

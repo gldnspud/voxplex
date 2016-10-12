@@ -59,7 +59,7 @@ class Sync(object):
         parent_path = ''
         for path_part in path.split('/'):
             ensure_path = posixpath.join(parent_path, path_part)
-            if not ensure_path in self._ensured:
+            if ensure_path not in self._ensured:
                 self.source.dir(parent_path).mkdir(path_part)
                 self.dest.dir(parent_path).mkdir(path_part)
                 self._ensured.add(ensure_path)

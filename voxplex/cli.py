@@ -1,8 +1,8 @@
 import click
 
 from .config import config_from_file
-from .local import local_from_config, Local
-from .remote import remote_from_config, SunVoxRemote
+from .local import local_from_config
+from .remote import remote_from_config
 from .sync import Sync
 
 DEFAULT_CONFIG_FILE = '~/.voxplex.yaml'
