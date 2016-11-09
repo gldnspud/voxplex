@@ -69,7 +69,8 @@ class LocalDir(LocalResource):
             if child_name.startswith('.'):
                 continue
             child_path = os.path.join(self.abspath, child_name)
-            resource_type = LocalDir if os.path.isdir(child_path) else LocalFile
+            resource_type = \
+                LocalDir if os.path.isdir(child_path) else LocalFile
             yield resource_type(self.local, child_path)
 
     def mkdir(self, name):

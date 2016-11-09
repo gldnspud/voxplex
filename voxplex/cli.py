@@ -15,7 +15,8 @@ def main():
 
 @main.command()
 @click.argument('source_name')
-@click.option('--config', '-c', default=DEFAULT_CONFIG_FILE, help='Config file.')
+@click.option('--config', '-c', default=DEFAULT_CONFIG_FILE,
+              help='Config file.')
 def ls(source_name, config):
     """List all files present at a source"""
     c = config_from_file(config)
@@ -28,7 +29,8 @@ def ls(source_name, config):
 
 
 @main.command()
-@click.option('--config', '-c', default=DEFAULT_CONFIG_FILE, help='Config file.')
+@click.option('--config', '-c', default=DEFAULT_CONFIG_FILE,
+              help='Config file.')
 def paths(config):
     c = config_from_file(config)
     for path in [d['path'] for d in c if 'path' in d]:
@@ -38,7 +40,8 @@ def paths(config):
 @main.command()
 @click.argument('remote_name')
 @click.argument('path')
-@click.option('--config', '-c', default=DEFAULT_CONFIG_FILE, help='Config file.')
+@click.option('--config', '-c', default=DEFAULT_CONFIG_FILE,
+              help='Config file.')
 def sync(remote_name, path, config):
     """Sync files between local and remote"""
     c = config_from_file(config)

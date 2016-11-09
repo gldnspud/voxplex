@@ -1,7 +1,7 @@
 import posixpath
 
-from pyquery import PyQuery as PQ
 import requests
+from pyquery import PyQuery as PQ
 
 
 def remote_from_config(config, name):
@@ -75,12 +75,14 @@ class SunVoxDir(SunVoxResource):
             if child_name.startswith('.') or child_name.startswith('/'):
                 continue
             child_path = posixpath.join(self.path, child_name)
-            resource_type = SunVoxDir if child_path.endswith('/') else SunVoxFile
+            resource_type = \
+                SunVoxDir if child_path.endswith('/') else SunVoxFile
             yield resource_type(self.remote, child_path)
 
     @property
     def url(self):
-        return self.remote.url_for_path(self.path) + ('/' if self.path != '' else '')
+        return self.remote.url_for_path(self.path) \
+               + ('/' if self.path != '' else '')
 
     def mkdir(self, name):
         response = requests.get(self.url, params={'d': name})

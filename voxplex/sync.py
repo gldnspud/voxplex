@@ -3,7 +3,8 @@ import posixpath
 
 class Sync(object):
 
-    def __init__(self, path, source, dest, sync_deletes=False, always_copy=False):
+    def __init__(self, path, source, dest,
+                 sync_deletes=False, always_copy=False):
         self.path = path
         self.source = source
         self.dest = dest
@@ -20,8 +21,10 @@ class Sync(object):
         print('Finding resources...')
         source_resources = set(self.source.all_resources(self.path))
         dest_resources = set(self.dest.all_resources(self.path))
-        print('  {} files at source'.format(len([r for r in source_resources if r.is_file])))
-        print('  {} files at dest'.format(len([r for r in dest_resources if r.is_file])))
+        print('  {} files at source'.format(
+            len([r for r in source_resources if r.is_file])))
+        print('  {} files at dest'.format(
+            len([r for r in dest_resources if r.is_file])))
         print()
         print('Ensuring directories:')
         dest_paths = set(r.path for r in dest_resources if r.is_dir)
