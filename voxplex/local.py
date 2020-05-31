@@ -14,10 +14,7 @@ class LocalResource(object):
 
     def __init__(self, local, path):
         self.local = local
-        if path.startswith('/'):
-            self.path = os.path.relpath(path, local.root)
-        else:
-            self.path = path
+        self.path = os.path.relpath(path, local.root) if path.startswith('/') else path
 
     def __hash__(self):
         return hash(repr(self))
@@ -99,7 +96,7 @@ class Local(object):
         os.path.abspath(os.path.join(self.root, top))
         root = LocalDir(self, top)
         paths_to_get = [root]
-        while len(paths_to_get) > 0:
+        while paths_to_get:
             path = paths_to_get.pop()
             yield path
             for child in path.children:

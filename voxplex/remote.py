@@ -11,7 +11,7 @@ def remote_from_config(config, name):
 
 
 def remote_names_from_config(config):
-    return set(d['remote'] for d in config if 'remote' in d)
+    return {d['remote'] for d in config if 'remote' in d}
 
 
 class SunVoxResource(object):
@@ -116,7 +116,7 @@ class SunVoxRemote(object):
             top = top[1:]
         root = SunVoxDir(self, top)
         paths_to_get = [root]
-        while len(paths_to_get) > 0:
+        while paths_to_get:
             path = paths_to_get.pop()
             yield path
             for child in path.children:
@@ -130,8 +130,7 @@ class SunVoxRemote(object):
 
     def names_in_page(self, doc):
         hrefs = {a.attrib['href'] for a in doc('a')}
-        names = {href for href in hrefs if not href.startswith('?')}
-        return names
+        return {href for href in hrefs if not href.startswith('?')}
 
     def names_in_path(self, path):
         return self.names_in_page(self.page_for_path(path))
@@ -140,8 +139,7 @@ class SunVoxRemote(object):
         url = self.url_for_path(path)
         url += '/' if not url.endswith('/') else ''
         response = requests.get(url)
-        doc = PQ(response.content)
-        return doc
+        return PQ(response.content)
 
     def url_for_path(self, path):
         return 'http://{}:8080/{}'.format(self.hostname, path)

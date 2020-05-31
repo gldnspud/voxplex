@@ -27,7 +27,7 @@ class Sync(object):
             len([r for r in dest_resources if r.is_file])))
         print()
         print('Ensuring directories:')
-        dest_paths = set(r.path for r in dest_resources if r.is_dir)
+        dest_paths = {r.path for r in dest_resources if r.is_dir}
         for resource in sorted(source_resources):
             if resource.is_dir and resource.path not in dest_paths:
                 self.ensure_dir(resource.path)
